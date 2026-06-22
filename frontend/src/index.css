@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-cream-50 text-brown-900 antialiased;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-brown-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-brown-700 transition-all duration-300 transform hover:scale-105 shadow-lg;
+  }
+  
+  .btn-secondary {
+    @apply bg-cream-200 text-brown-800 px-6 py-3 rounded-lg font-semibold hover:bg-cream-300 transition-all duration-300 transform hover:scale-105;
+  }
+  
+  .btn-gold {
+    @apply bg-gold-500 text-brown-900 px-6 py-3 rounded-lg font-semibold hover:bg-gold-600 transition-all duration-300 transform hover:scale-105 shadow-lg;
+  }
+  
+  .card {
+    @apply bg-white rounded-2xl shadow-lg overflow-hidden transition-all duration-300 hover:shadow-2xl;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 border border-brown-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-brown-400 focus:border-transparent transition-all duration-300;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5E0D0;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #C65818;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #96602D;
+}
+
+/* Loading animation */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.skeleton {
+  background: linear-gradient(to right, #f0f0f0 4%, #e0e0e0 25%, #f0f0f0 36%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
