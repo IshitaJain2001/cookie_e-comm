@@ -1,10 +1,9 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { Menu, X, ShoppingBag, Heart, User, Moon, Sun, Search } from 'lucide-react'
+import { Menu, X, ShoppingBag, Heart, User, Search } from 'lucide-react'
 import { useAuth } from '../../context'
 import { useCart } from '../../context'
 import { useWishlist } from '../../context'
-import { useTheme } from '../../context'
 import Button from '../ui/Button'
 
 const Navbar = () => {
@@ -14,7 +13,6 @@ const Navbar = () => {
   const { user, logout } = useAuth()
   const { cartCount } = useCart()
   const { wishlist } = useWishlist()
-  const { isDark, toggleTheme } = useTheme()
 
   const handleSearch = (e) => {
     e.preventDefault()
@@ -42,9 +40,6 @@ const Navbar = () => {
             <Link to="/shop" className="text-brown-800 hover:text-brown-600 font-medium transition-colors">Shop</Link>
             <Link to="/about" className="text-brown-800 hover:text-brown-600 font-medium transition-colors">About</Link>
             <Link to="/contact" className="text-brown-800 hover:text-brown-600 font-medium transition-colors">Contact</Link>
-            <button onClick={toggleTheme} className="p-2 hover:bg-cream-200 rounded-full transition-colors">
-              {isDark ? <Sun className="w-5 h-5 text-brown-600" /> : <Moon className="w-5 h-5 text-brown-600" />}
-            </button>
           </div>
 
           {/* Search Bar */}
@@ -63,13 +58,6 @@ const Navbar = () => {
 
           {/* Icons */}
           <div className="hidden md:flex items-center space-x-4">
-            <button
-              onClick={toggleTheme}
-              className="p-2 hover:bg-cream-200 rounded-full transition-colors"
-            >
-              {isDark ? <Sun className="w-6 h-6 text-brown-600" /> : <Moon className="w-6 h-6 text-brown-600" />}
-            </button>
-            
             <Link to="/wishlist" className="p-2 hover:bg-cream-200 rounded-full transition-colors relative">
               <Heart className="w-6 h-6 text-brown-600" />
               {wishlist.length > 0 && (
@@ -141,9 +129,6 @@ const Navbar = () => {
             <Link to="/contact" className="block py-2 text-brown-800 hover:text-brown-600 font-medium">Contact</Link>
             
             <div className="flex items-center space-x-4 pt-4 border-t border-cream-200">
-              <button onClick={toggleTheme} className="p-2 hover:bg-cream-200 rounded-full">
-                {isDark ? <Sun className="w-6 h-6 text-brown-600" /> : <Moon className="w-6 h-6 text-brown-600" />}
-              </button>
               <Link to="/wishlist" className="p-2 hover:bg-cream-200 rounded-full relative">
                 <Heart className="w-6 h-6 text-brown-600" />
                 {wishlist.length > 0 && (
