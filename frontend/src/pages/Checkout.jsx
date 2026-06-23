@@ -7,6 +7,7 @@ import Card from '../components/ui/Card'
 import { useCart } from '../context'
 import { useAuth } from '../context'
 import axios from 'axios'
+import API_URL from '../config/api'
 
 const Checkout = () => {
   const navigate = useNavigate()
@@ -77,7 +78,7 @@ const Checkout = () => {
         total: cartTotal + (cartTotal >= 500 ? 0 : 50)
       }
 
-      const response = await axios.post('/api/orders', orderData)
+      const response = await axios.post(`${API_URL}/api/orders`, orderData)
       setOrderId(response.data._id)
       clearCart()
       setOrderPlaced(true)

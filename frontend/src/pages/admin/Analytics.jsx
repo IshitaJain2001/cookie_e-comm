@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { TrendingUp, TrendingDown, DollarSign, ShoppingCart, Users, Package } from 'lucide-react'
 import Card from '../../components/ui/Card'
 import axios from 'axios'
+import API_URL from '../../config/api'
 
 const Analytics = () => {
   const [stats, setStats] = useState({
@@ -23,9 +24,9 @@ const Analytics = () => {
     setLoading(true)
     try {
       const [ordersRes, productsRes, usersRes] = await Promise.all([
-        axios.get('/api/orders'),
-        axios.get('/api/products'),
-        axios.get('/api/users')
+        axios.get(`${API_URL}/api/orders`),
+        axios.get(`${API_URL}/api/products`),
+        axios.get(`${API_URL}/api/users`)
       ])
       
       const totalRevenue = ordersRes.data.reduce((sum, order) => sum + order.total, 0)

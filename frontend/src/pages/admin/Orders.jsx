@@ -4,6 +4,7 @@ import { Search, Filter, Eye } from 'lucide-react'
 import Card from '../../components/ui/Card'
 import Modal from '../../components/ui/Modal'
 import axios from 'axios'
+import API_URL from '../../config/api'
 
 const Orders = () => {
   const [orders, setOrders] = useState([])
@@ -22,7 +23,7 @@ const Orders = () => {
   const fetchOrders = async () => {
     setLoading(true)
     try {
-      const response = await axios.get('/api/orders')
+      const response = await axios.get(`${API_URL}/api/orders`)
       setOrders(response.data)
     } catch (error) {
       console.error('Error fetching orders:', error)
@@ -33,7 +34,7 @@ const Orders = () => {
 
   const handleStatusUpdate = async (orderId, newStatus) => {
     try {
-      await axios.put(`/api/orders/${orderId}/status`, { status: newStatus })
+      await axios.put(`${API_URL}/api/orders/${orderId}/status`, { status: newStatus })
       fetchOrders()
     } catch (error) {
       console.error('Error updating order status:', error)

@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import axios from 'axios'
+import API_URL from '../config/api'
 
 const CartContext = createContext(null)
 
@@ -13,7 +14,7 @@ export const CartProvider = ({ children }) => {
 
   const fetchCart = async () => {
     try {
-      const response = await axios.get('/api/cart')
+      const response = await axios.get(`${API_URL}/api/cart`)
       setCart(response.data.items || [])
     } catch (error) {
       console.error('Error fetching cart:', error)
@@ -24,7 +25,7 @@ export const CartProvider = ({ children }) => {
 
   const addToCart = async (productId, quantity = 1) => {
     try {
-      await axios.post('/api/cart', { productId, quantity })
+      await axios.post(`${API_URL}/api/cart`, { productId, quantity })
       await fetchCart()
     } catch (error) {
       console.error('Error adding to cart:', error)
@@ -33,7 +34,7 @@ export const CartProvider = ({ children }) => {
 
   const removeFromCart = async (productId) => {
     try {
-      await axios.delete(`/api/cart/${productId}`)
+      await axios.delete(`${API_URL}/api/cart/${productId}`)
       await fetchCart()
     } catch (error) {
       console.error('Error removing from cart:', error)
@@ -42,7 +43,7 @@ export const CartProvider = ({ children }) => {
 
   const updateQuantity = async (productId, quantity) => {
     try {
-      await axios.put(`/api/cart/${productId}`, { quantity })
+      await axios.put(`${API_URL}/api/cart/${productId}`, { quantity })
       await fetchCart()
     } catch (error) {
       console.error('Error updating quantity:', error)
@@ -51,7 +52,7 @@ export const CartProvider = ({ children }) => {
 
   const clearCart = async () => {
     try {
-      await axios.delete('/api/cart')
+      await axios.delete(`${API_URL}/api/cart`)
       setCart([])
     } catch (error) {
       console.error('Error clearing cart:', error)

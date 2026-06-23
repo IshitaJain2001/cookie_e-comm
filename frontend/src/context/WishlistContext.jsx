@@ -1,5 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import axios from 'axios'
+import API_URL from '../config/api'
 
 const WishlistContext = createContext(null)
 
@@ -13,7 +14,7 @@ export const WishlistProvider = ({ children }) => {
 
   const fetchWishlist = async () => {
     try {
-      const response = await axios.get('/api/wishlist')
+      const response = await axios.get(`${API_URL}/api/wishlist`)
       setWishlist(response.data || [])
     } catch (error) {
       console.error('Error fetching wishlist:', error)
@@ -24,7 +25,7 @@ export const WishlistProvider = ({ children }) => {
 
   const addToWishlist = async (productId) => {
     try {
-      await axios.post('/api/wishlist', { productId })
+      await axios.post(`${API_URL}/api/wishlist`, { productId })
       await fetchWishlist()
     } catch (error) {
       console.error('Error adding to wishlist:', error)
@@ -33,7 +34,7 @@ export const WishlistProvider = ({ children }) => {
 
   const removeFromWishlist = async (productId) => {
     try {
-      await axios.delete(`/api/wishlist/${productId}`)
+      await axios.delete(`${API_URL}/api/wishlist/${productId}`)
       await fetchWishlist()
     } catch (error) {
       console.error('Error removing from wishlist:', error)

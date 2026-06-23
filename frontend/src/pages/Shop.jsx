@@ -9,6 +9,7 @@ import { useCart } from '../context'
 import { useWishlist } from '../context'
 import Modal from '../components/ui/Modal'
 import axios from 'axios'
+import API_URL from '../config/api'
 
 const Shop = () => {
   const [products, setProducts] = useState([])
@@ -36,7 +37,7 @@ const Shop = () => {
       if (selectedCategory !== 'all') params.append('category', selectedCategory)
       params.append('sort', sortBy)
       
-      const response = await axios.get(`/api/products?${params}`)
+      const response = await axios.get(`${API_URL}/api/products?${params}`)
       setProducts(response.data)
     } catch (error) {
       console.error('Error fetching products:', error)

@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { Search, Mail, Phone, MapPin } from 'lucide-react'
 import Card from '../../components/ui/Card'
 import axios from 'axios'
+import API_URL from '../../config/api'
 
 const Customers = () => {
   const [customers, setCustomers] = useState([])
@@ -16,7 +17,7 @@ const Customers = () => {
   const fetchCustomers = async () => {
     setLoading(true)
     try {
-      const response = await axios.get('/api/users')
+      const response = await axios.get(`${API_URL}/api/users`)
       setCustomers(response.data)
     } catch (error) {
       console.error('Error fetching customers:', error)

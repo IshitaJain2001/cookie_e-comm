@@ -6,6 +6,7 @@ import Card from '../components/ui/Card'
 import Badge from '../components/ui/Badge'
 import { useEffect, useState } from 'react'
 import axios from 'axios'
+import API_URL from '../config/api'
 
 const Home = () => {
   const [products, setProducts] = useState([])
@@ -17,7 +18,7 @@ const Home = () => {
 
   const fetchProducts = async () => {
     try {
-      const response = await axios.get('/api/products?featured=true&limit=8')
+      const response = await axios.get(`${API_URL}/api/products?featured=true&limit=8`)
       setProducts(response.data)
     } catch (error) {
       console.error('Error fetching products:', error)

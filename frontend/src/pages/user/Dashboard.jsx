@@ -8,6 +8,7 @@ import Badge from '../../components/ui/Badge'
 import { useAuth } from '../../context'
 import { useWishlist } from '../../context'
 import axios from 'axios'
+import API_URL from '../../config/api'
 
 const Dashboard = () => {
   const { user, logout } = useAuth()
@@ -23,7 +24,7 @@ const Dashboard = () => {
 
   const fetchOrders = async () => {
     try {
-      const response = await axios.get('/api/orders/my-orders')
+      const response = await axios.get(`${API_URL}/api/orders/my-orders`)
       setOrders(response.data)
     } catch (error) {
       console.error('Error fetching orders:', error)

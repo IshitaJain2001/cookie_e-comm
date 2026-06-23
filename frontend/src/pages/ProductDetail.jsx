@@ -9,6 +9,7 @@ import Skeleton from '../components/ui/Skeleton'
 import { useCart } from '../context'
 import { useWishlist } from '../context'
 import axios from 'axios'
+import API_URL from '../config/api'
 
 const ProductDetail = () => {
   const { id } = useParams()
@@ -27,7 +28,7 @@ const ProductDetail = () => {
   const fetchProduct = async () => {
     setLoading(true)
     try {
-      const response = await axios.get(`/api/products/${id}`)
+      const response = await axios.get(`${API_URL}/api/products/${id}`)
       setProduct(response.data)
       fetchRelatedProducts(response.data.category, response.data._id)
     } catch (error) {
@@ -39,7 +40,7 @@ const ProductDetail = () => {
 
   const fetchRelatedProducts = async (category, productId) => {
     try {
-      const response = await axios.get(`/api/products?category=${category}&limit=4`)
+      const response = await axios.get(`${API_URL}/api/products?category=${category}&limit=4`)
       setRelatedProducts(response.data.filter(p => p._id !== productId))
     } catch (error) {
       console.error('Error fetching related products:', error)

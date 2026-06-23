@@ -5,6 +5,7 @@ import { LayoutDashboard, ShoppingBag, Users, Package, TrendingUp, Settings, Log
 import Card from '../../components/ui/Card'
 import { useAuth } from '../../context'
 import axios from 'axios'
+import API_URL from '../../config/api'
 
 const AdminDashboard = () => {
   const navigate = useNavigate()
@@ -30,9 +31,9 @@ const AdminDashboard = () => {
   const fetchStats = async () => {
     try {
       const [ordersRes, productsRes, usersRes] = await Promise.all([
-        axios.get('/api/orders'),
-        axios.get('/api/products'),
-        axios.get('/api/users')
+        axios.get(`${API_URL}/api/orders`),
+        axios.get(`${API_URL}/api/products`),
+        axios.get(`${API_URL}/api/users`)
       ])
       
       const totalRevenue = ordersRes.data.reduce((sum, order) => sum + order.total, 0)
@@ -50,7 +51,7 @@ const AdminDashboard = () => {
 
   const fetchRecentOrders = async () => {
     try {
-      const response = await axios.get('/api/orders?limit=5')
+      const response = await axios.get(`${API_URL}/api/orders?limit=5`)
       setRecentOrders(response.data.slice(0, 5))
     } catch (error) {
       console.error('Error fetching recent orders:', error)

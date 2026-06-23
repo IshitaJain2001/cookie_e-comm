@@ -5,6 +5,7 @@ import Card from '../../components/ui/Card'
 import Button from '../../components/ui/Button'
 import Modal from '../../components/ui/Modal'
 import axios from 'axios'
+import API_URL from '../../config/api'
 
 const Products = () => {
   const [products, setProducts] = useState([])
@@ -32,7 +33,7 @@ const Products = () => {
   const fetchProducts = async () => {
     setLoading(true)
     try {
-      const response = await axios.get('/api/products')
+      const response = await axios.get(`${API_URL}/api/products`)
       setProducts(response.data)
     } catch (error) {
       console.error('Error fetching products:', error)
@@ -45,9 +46,9 @@ const Products = () => {
     e.preventDefault()
     try {
       if (editingProduct) {
-        await axios.put(`/api/products/${editingProduct._id}`, formData)
+        await axios.put(`${API_URL}/api/products/${editingProduct._id}`, formData)
       } else {
-        await axios.post('/api/products', formData)
+        await axios.post(`${API_URL}/api/products`, formData)
       }
       setIsModalOpen(false)
       setEditingProduct(null)
